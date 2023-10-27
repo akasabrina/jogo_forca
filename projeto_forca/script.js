@@ -1,5 +1,5 @@
 
-word = [this.word[Math.floor(Math.random() * this.word.length)]]
+let word = this.word[Math.floor(Math.random() * this.word.length)]
 let guessedWord = [];
 let wrongLetters = [];
 for(let i = 0; i < word.length; i++) {
@@ -8,12 +8,6 @@ for(let i = 0; i < word.length; i++) {
 
 
 function guess() {
-    document.getElementById('letter').addEventListener('letter', function() {
-        if(this.value.length > 1) {
-            alert('Insira somente um caracter')
-        }
-        else;
-    });
     let letter = document.getElementById('letter').value.toUpperCase();
     if(word.includes(letter)) {
         for(let i = 0; i < word.length; i++) {
@@ -21,11 +15,18 @@ function guess() {
                 guessedWord[i] = letter;
             }
         }
+        document.getElementById('letter').addEventListener('letter', function() {
+        if(this.value.length > 1) {
+            alert('Insira somente um caracter')
+        }
+        else;
+    });
     } else {
         wrongLetters.push(letter);
         document.getElementById('hangman').innerHTML += addEventListener('Adicionar Image');
         document.getElementById('wrong-letters').innerHTML = 'Letras erradas: ' + wrongLetters.join(', ');
     }
+    
     
     document.getElementById('word').innerHTML = guessedWord.join(' ');
     
