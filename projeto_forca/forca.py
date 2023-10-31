@@ -8,7 +8,8 @@ def tema(num):
             return "animais"
         case 1:
             return "profissoes"
-
+        case 2:
+            return "paises"
 
 def carrega_palavra_secreta(num):
     palavras = []
@@ -22,10 +23,16 @@ def carrega_palavra_secreta(num):
     palavra_secreta = palavras[numero].upper()
     return palavra_secreta
 
-
 def inicializa_letras(palavra):
-    return ["-" if letra == "-" else "_" for letra in palavra]
-
+    secret = []
+    for letra in palavra:
+        if letra == " ":
+            secret.append(" ")
+        elif letra == "-":
+            secret.append("-")
+        else:
+            secret.append("_")
+    return secret
 
 def pede_chute():
     chute = input("\nDigite uma letra: ")
@@ -38,14 +45,12 @@ def pede_chute():
         print("Digite apenas uma letra.")
         pede_chute()
 
-
 def marca_chute_correto(chute, letras_acertadas, palavra_secreta):
     index = 0
     for letra in palavra_secreta:
         if (chute == letra):
             letras_acertadas[index] = letra
         index += 1
-
 
 def desenha_forca(erros):
     print("  _______     ")
@@ -97,13 +102,12 @@ def desenha_forca(erros):
     print("_|___         ")
     print()
 
-
 def jogar():
     flag = True
     while(flag==True):
         print("\n-------- Bem vindo ao jogo da Forca! --------\n")
 
-        print("Escolha um tema para jogar.\n[0] Animais\n[1] Profissões")
+        print("Escolha um tema para jogar.\n[0] Animais\n[1] Profissões\n[2] Países")
         num = int(input("Tema: "))
         os.system("cls")
         palavra_secreta = carrega_palavra_secreta(num)
@@ -120,7 +124,8 @@ def jogar():
         print(letras_acertadas)
         while (not acertou and not enforcou):
             chute = pede_chute()
-
+            os.system("cls")
+            
             if chute not in letras_usadas:
                 if (chute in palavra_secreta2):
                     marca_chute_correto(chute, letras_acertadas, palavra_secreta2)
