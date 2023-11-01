@@ -1,25 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/reset.css') }}">
 
-    <script defer src="/projeto_forca/js/login.js"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='script/login.js')}}"></script>
 
-    <title>Jogo da Forca</title>
+    <title>Forc.aa</title>
 </head>
 <body>
-    <form class="login-form">
-        <div class="login-header">
-            <img src="/projeto_forca/img/brain.png" alt="brain incon">
+    <div class="cabecalho">
+        <div class="cabecalho-header">
             <h1>Jogo da Forca</h1>
         </div>
-        <input type="text" placeholder="Name" class="login-input">
-        <button type="submit" class="login-button" disabled>Play</button>
-    </form> 
+    </div> 
 </body>
 </html>
 
