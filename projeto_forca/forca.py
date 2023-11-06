@@ -13,7 +13,16 @@ def tema(num):
         case _:
             return "Insira um numero de 0 a 2"
 
-#def dificuldade() 
+def dificuldade(chances):
+    match chances:
+        case 0:
+            return "Facíl"
+        case 1:
+            return "Médio"
+        case 2:
+            return "Difícil"
+        case _:
+            return "Insira um numero de 0 a 2"
 
 def carrega_palavra_secreta(num):
     palavras = []
@@ -106,6 +115,31 @@ def desenha_forca(erros):
     print("_|___         ")
     print()
 
+def calcular_pontos(erros):
+    match erros: 
+        case 0:
+            return pontos == 700
+        case 1:
+            return pontos == 600
+        case 2:
+            return pontos == 500
+        case 3:
+            return pontos == 400
+        case 4:
+            return pontos == 300
+        case 5:
+            return pontos == 200
+        case 6:
+            return pontos == 100
+        case _:
+            return pontos == 0
+        
+
+# Função que soma os pontos obtidos nesta rodada à pontuação total do jogador
+def somar_pontos(pontuacao_atual, pontos):
+    pontuacao_atual += pontos  # Soma os pontos à pontuação total atual do jogador
+    return pontuacao_atual  # Retorna a pontuação atualizada do jogado
+
 def jogar():
     flag = True
     while(flag==True):
@@ -113,6 +147,9 @@ def jogar():
 
         print("Escolha um tema para jogar.\n[0] Animais\n[1] Profissões\n[2] Países")
         num = int(input("Tema: "))
+        os.system("cls")
+        print("Escolha uma dificulade do jogo.\n[0] Facíl\n[1] Normal\n[2] Difícil")
+        chances = int(input("Dificuldade: "))
         os.system("cls")
         palavra_secreta = carrega_palavra_secreta(num)
         palavra_secreta2 = unidecode(palavra_secreta)
@@ -149,7 +186,7 @@ def jogar():
                 print("Essa letra já foi usada")
                 os.system("PAUSE")
 
-            enforcou = erros == 7
+            enforcou = erros == chancess
             acertou = "_" not in letras_acertadas
 
         if (acertou):
@@ -158,7 +195,7 @@ def jogar():
         else:
             print("\nPuxa, você foi enforcado!")
             print(f"A palavra era {palavra_secreta}\n")
-        print ("Sua pontuação foi de {pontuacao_atual}\n")
+        print (f"Sua pontuação foi de {pontuacao_atual}\n")
         print('-------- FIM DE JOGO --------')
 
         jogar = int(input("Gostaria de jogar novamente?\n[0]não [1]sim -> "))
@@ -167,30 +204,7 @@ def jogar():
             os.system("cls")
         else:
             flag = False
-def calcular_pontos(erros):
-    match erros: 
-        case 0:
-            return pontos == 700
-        case 1:
-            return pontos == 600
-        case 2:
-            return pontos == 500
-        case 3:
-            return pontos == 400
-        case 4:
-            return pontos == 300
-        case 5:
-            return pontos == 200
-        case 6:
-            return pontos == 100
-        case _:
-            return pontos == 0
-        
 
-# Função que soma os pontos obtidos nesta rodada à pontuação total do jogador
-def somar_pontos(pontuacao_atual, pontos):
-    pontuacao_atual += pontos  # Soma os pontos à pontuação total atual do jogador
-    return pontuacao_atual  # Retorna a pontuação atualizada do jogado
 
 if(__name__ == '__main__'):
     jogar()
