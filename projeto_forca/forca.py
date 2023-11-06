@@ -25,7 +25,7 @@ def dificuldade(num):
 
 def carrega_palavra_secreta(tema_palavra):
     palavras = []
-    with open(f"projeto_forca/tema/{tema_palavra}.txt", "r", encoding="utf-8") as arquivo:
+    with open(f"tema/{tema_palavra}.txt", "r", encoding="utf-8") as arquivo:
         for linha in arquivo:
             linha = linha.strip()
             palavras.append(linha)
