@@ -2,9 +2,19 @@ from unidecode import unidecode
 import os
 import random
 
-def carrega_palavra_secreta():
+def tema(num):
+    match num:
+        case 0:
+            return "animais"
+        case 1:
+            return "profissoes"
+        case 2:
+            return "paises"
+
+def carrega_palavra_secreta(num):
     palavras = []
-    with open("palavras.txt", "r", encoding="utf-8") as arquivo:
+    tema_palavra = tema(num)
+    with open(f"tema/{tema_palavra}.txt", "r", encoding="utf-8") as arquivo:
         for linha in arquivo:
             linha = linha.strip()
             palavras.append(linha)
@@ -13,17 +23,27 @@ def carrega_palavra_secreta():
     palavra_secreta = palavras[numero].upper()
     return palavra_secreta
 
-
 def inicializa_letras(palavra):
-    return ["-" if letra == "-" else "_" for letra in palavra]
-
+    secret = []
+    for letra in palavra:
+        if letra == " ":
+            secret.append(" ")
+        elif letra == "-":
+            secret.append("-")
+        else:
+            secret.append("_")
+    return secret
 
 def pede_chute():
     chute = input("\nDigite uma letra: ")
-    os.system("cls")
-    chute = chute.strip().upper()
-    return chute
 
+    if len(chute) == 1:
+        os.system("cls")
+        chute = chute.strip().upper()
+        return chute
+    else:
+        print("Digite apenas uma letra.")
+        pede_chute()
 
 def marca_chute_correto(chute, letras_acertadas, palavra_secreta):
     index = 0
@@ -31,7 +51,6 @@ def marca_chute_correto(chute, letras_acertadas, palavra_secreta):
         if (chute == letra):
             letras_acertadas[index] = letra
         index += 1
-
 
 def desenha_forca(erros):
     print("  _______     ")
@@ -88,7 +107,10 @@ def jogar():
     while(flag==True):
         print("\n-------- Bem vindo ao jogo da Forca! --------\n")
 
-        palavra_secreta = carrega_palavra_secreta()
+        print("Escolha um tema para jogar.\n[0] Animais\n[1] Profissões\n[2] Países")
+        num = int(input("Tema: "))
+        os.system("cls")
+        palavra_secreta = carrega_palavra_secreta(num)
         palavra_secreta2 = unidecode(palavra_secreta)
 
         letras_acertadas = inicializa_letras(palavra_secreta)
@@ -102,41 +124,29 @@ def jogar():
         print(letras_acertadas)
         while (not acertou and not enforcou):
             chute = pede_chute()
-
+            os.system("cls")
+            
             if chute not in letras_usadas:
                 if (chute in palavra_secreta2):
-                    letras_usadas.append(chute)
-                    letras_faltando = str(letras_acertadas.count('_'))
                     marca_chute_correto(chute, letras_acertadas, palavra_secreta2)
 
-                    print(f"\nLetras usadas: {letras_usadas}\n")
-                    print('Ainda faltam acertar {} letras'.format(letras_faltando))
-                    print('Você ainda tem {} tentativas'.format(7-erros))
-                    desenha_forca(erros)
-
-                    if (letras_faltando == "0"):
-                        print("PARABÉNS!! Você encontrou todas as letras formando a palavra '{}'".format(palavra_secreta.upper()))
-
                 else:
-                    letras_usadas.append(chute)
                     erros += 1
-                    letras_faltando = str(letras_acertadas.count('_'))
 
-                    print(f"\nLetras usadas: {letras_usadas}\n")
-                    print('Ainda faltam acertar {} letras'.format(letras_faltando))
-                    print('Você ainda tem {} tentativas'.format(7-erros))
-
-                    desenha_forca(erros)
-
-                enforcou = erros == 7
-                acertou = "_" not in letras_acertadas
-
+                letras_usadas.append(chute)
+                letras_faltando = str(letras_acertadas.count('_'))
+                print(f"\nLetras usadas: {letras_usadas}\n")
+                print('Ainda faltam acertar {} letras'.format(letras_faltando))
+                print('Você ainda tem {} tentativas'.format(7-erros))
+                desenha_forca(erros)
                 print(letras_acertadas)
-                
+
             else:
                 print("Essa letra já foi usada")
                 os.system("PAUSE")
-            
+
+            enforcou = erros == 7
+            acertou = "_" not in letras_acertadas
 
         if (acertou):
             print("\nParabéns, você ganhou!")
@@ -147,8 +157,8 @@ def jogar():
 
         print('-------- FIM DE JOGO --------')
 
-        jogar = input("Gostaria de jogar novamente?\n [y] sim [n] não -> ")
-        if jogar.lower() == "y":
+        jogar = int(input("Gostaria de jogar novamente?\n[0]não [1]sim -> "))
+        if jogar == 1:
             flag = True
             os.system("cls")
         else:
