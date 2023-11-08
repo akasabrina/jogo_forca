@@ -4,6 +4,8 @@ from desenho import desenha_forca  # Módulo contendo as funções para desenhar
 import os  # Módulo para interagir com o sistema operacional (limpar a tela, por exemplo)
 import random  # Módulo para gerar números aleatórios usados na seleção de palavras do tema
 
+
+
 # Função para mapear o número do tema para uma categoria específica
 def tema(num_tema):
     match num_tema:
@@ -145,11 +147,13 @@ def proxima_partida():
             os.system("cls")  # Limpa a tela (para sistemas Windows)
             print("Opção inválida. Por favor, escolha 1 para jogar novamente ou 2 para sair.")  # Informa ao jogador que deve inserir uma opção válida
 
+
+
 # Função que exibe a mensagem de fim de jogo e pergunta ao jogador se deseja jogar novamente
 def Fim():
     os.system("cls")  # Limpa a tela (para sistemas Windows)
     print('-------- FIM DE JOGO --------')  # Exibe uma mensagem indicando o fim do jogo
-
+    
     while True:  # Loop infinito para solicitar a decisão do jogador sobre jogar novamente ou sair do jogo
         print("Gostaria de jogar novamente?\n[1] Sim\n[2] Não")  # Solicita ao jogador para inserir 1 para jogar novamente ou 2 para sair
 
@@ -158,8 +162,8 @@ def Fim():
 
             if jogar == 1:  # Se o jogador escolher 1 (sim), o jogo será reiniciado
                 os.system("cls")
-                num_tema = inicio()  # Permite ao jogador escolher um novo tema
-                num_dificuldade = tela_dificuldade()  # Solicita ao jogador escolher a dificuldade
+               
+        
                 return True  # Reinicia o loop principal para iniciar um novo jogo
             elif jogar == 2:  # Se o jogador escolher 2 (não), o jogo termina
                 os.system("cls")
@@ -240,7 +244,9 @@ def jogar():
             print("\nPuxa, você foi enforcado!")  # Informa ao jogador que ele foi enforcado
             print(f"A palavra era {palavra_secreta}\n")  # Exibe a palavra secreta ao jogador
             os.system('pause')  # Pausa o programa para que o jogador possa ver a palavra antes de continuar
-            Fim() # Se o jogador deseja jogar novamente
+            while True:  # Loop externo para garantir que o jogo seja reiniciado após a função Fim()
+                jogar()  # Chama a função principal do jogo
+                Fim()  # Chama a função Fim() após o jogo terminar
 
 if(__name__ == '__main__'):
     jogar()  # Chama a função jogar para iniciar o jogo
