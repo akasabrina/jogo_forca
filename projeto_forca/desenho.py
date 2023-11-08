@@ -1,9 +1,9 @@
-def desenha_forca(num, erros):
+def desenha_forca( num_dificuldade, erros):
     # Imprime as partes fixas da forca
     print("  _______     ")
     print(" |/      |    ")
 
-    match num:
+    match  num_dificuldade:
         case 1: # Dificuldade: Fácil
             # Condições para desenhar diferentes partes da forca de acordo com o número de erros e da dificuldade
             if (erros == 1):
