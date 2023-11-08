@@ -10,9 +10,9 @@ def tema(num_tema):
         case 1:
             return "animais"
         case 2:
-            return "profissões"
+            return "profissoes"
         case 3:
-            return "países"
+            return "paises"
 
 # Função para mapear o número da dificuldade para o número de chances
 def dificuldade(num_dificuldade):
@@ -95,9 +95,11 @@ def inicio():
             if 1 <= num <= 3:  # Verifica se o número inserido está dentro do intervalo de 1 a 3
                 return num  # Retorna o número do tema escolhido para ser usado posteriormente no jogo
             else:
-                print("Por favor, escolha uma opção válida (1 a 3).")  # Informa ao jogador que a opção inserida não é válida
+                os.system('cls')
+                print("Por favor, escolha uma opção válida .\n[1] Animais\n[2] Profissões\n[3] Países")  # Informa ao jogador que a opção inserida não é válida
         except ValueError:
-            print("Por favor, digite um número válido.")  # Informa ao jogador que deve inserir um número válido, caso contrário, ocorre um erro de valor
+            os.system('cls')
+            print("Por favor, digite uma opção válida.\n[1] Animais\n[2] Profissões\n[3] Países")  # Informa ao jogador que deve inserir um número válido, caso contrário, ocorre um erro de valor
 
 
 # Função para permitir ao jogador escolher a dificuldade do jogo
@@ -114,115 +116,135 @@ def tela_dificuldade():
             if 1 <= num_dificuldade <= 3:  # Verifica se o número inserido está dentro do intervalo de 1 a 3
                 return num_dificuldade  # Retorna o número da dificuldade escolhida para ser usado posteriormente no jogo
             else:
+                os.system('cls')
                 print("Por favor! Insira uma opção válida. \n[1] Fácil - 9 chances\n[2] Médio - 7 chances\n[3] Difícil - 5 chances")  # Informa ao jogador que a opção inserida não é válida
         except ValueError:
-            print('Por Favor, Insira um valor válido')  # Informa ao jogador que deve inserir um número válido, caso contrário, ocorre um erro de valor
+            os.system('cls')
+            print('Por Favor, Insira uma opção válida.\n[1] Fácil - 9 chances\n[2] Médio - 7 chances\n[3] Difícil - 5 chances')  # Informa ao jogador que deve inserir um número válido, caso contrário, ocorre um erro de valor
 
 
 # Função que pergunta ao jogador se deseja jogar novamente após o fim do jogo
 def proxima_partida():
     while True:  # Loop infinito para solicitar a decisão do jogador sobre a próxima partida
         print("Próxima partida?\n[1] Sim \n[2] Não ")  # Solicita ao jogador para inserir 1 para jogar novamente ou 2 para sair
-        jogar = int(input("Escolha: "))  # Lê a escolha do jogador (1 ou 2) como um número inteiro
-    
-        if jogar == 1:  # Se o jogador escolher 1 (sim), o jogo será reiniciado
-            os.system("cls")  # Limpa a tela (para sistemas Windows) para uma nova partida
-            break  # Sai do loop e continua com a próxima iteração do jogo
-        elif jogar == 2:  # Se o jogador escolher 2 (não), o jogo termina
+        
+        try:
+            jogar = int(input("Escolha: "))  # Lê a escolha do jogador (1 ou 2) como um número inteiro
+            
+            if jogar == 1:  # Se o jogador escolher 1 (sim), o jogo será reiniciado
+                os.system("cls")  # Limpa a tela (para sistemas Windows) para uma nova partida
+                break  # Sai do loop e continua com a próxima iteração do jogo
+            elif jogar == 2:  # Se o jogador escolher 2 (não), o jogo termina
+                os.system("cls")  # Limpa a tela (para sistemas Windows)
+                print(f"Obrigado por jogar!")  # Exibe uma mensagem de agradecimento ao jogador
+                exit()  # Termina o programa
+            else:  # Se o jogador inserir um número diferente de 1 ou 2
+                os.system("cls")  # Limpa a tela (para sistemas Windows)
+                print("Opção inválida. Por favor, escolha 1 para jogar novamente ou 2 para sair.")  # Informa ao jogador que a opção inserida não é válida
+        except ValueError:  # Se o jogador inserir algo que não seja um número inteiro
             os.system("cls")  # Limpa a tela (para sistemas Windows)
-            print(f"Obrigado por jogar!")  # Exibe uma mensagem de agradecimento ao jogador
-            exit()  # Termina o programa
-        else:  # Se o jogador inserir um número diferente de 1 ou 2
-            os.system("cls")  # Limpa a tela (para sistemas Windows)
-            print("Opção inválida. Por favor, escolha 1 para jogar novamente ou 2 para sair.")  # Informa ao jogador que a opção inserida não é válida
+            print("Opção inválida. Por favor, escolha 1 para jogar novamente ou 2 para sair.")  # Informa ao jogador que deve inserir uma opção válida
+
 
 
 # Função que exibe a mensagem de fim de jogo e pergunta ao jogador se deseja jogar novamente
 def Fim():
     os.system("cls")  # Limpa a tela (para sistemas Windows)
     print('-------- FIM DE JOGO --------')  # Exibe uma mensagem indicando o fim do jogo
-
+    
     while True:  # Loop infinito para solicitar a decisão do jogador sobre jogar novamente ou sair do jogo
-        print("Gostaria de jogar novamente?\n[1] Sim\n[2] Não -> ")  # Solicita ao jogador para inserir 1 para jogar novamente ou 2 para sair
-        jogar = int(input("Escolha: "))
-        if jogar == 1:  # Se o jogador escolher 1 (sim), o jogo será reiniciado
-            os.system("cls")  # Limpa a tela (para sistemas Windows) para uma nova partida
-            return 0  # Retorna 0 para indicar que o jogo deve ser reiniciado
-        elif jogar == 2:  # Se o jogador escolher 2 (não), o jogo termina
-            os.system("cls")  # Limpa a tela (para sistemas Windows)
-            print(f"Obrigado por jogar!")  # Exibe uma mensagem de agradecimento ao jogador
-            exit()  # Termina o programa
-        else:  # Se o jogador inserir um número diferente de 1 ou 2
-            os.system("cls")  # Limpa a tela (para sistemas Windows)
-            print("Opção inválida. Por favor, escolha 1 para jogar novamente ou 2 para sair.")  # Informa ao jogador que a opção inserida não é válida
+        print("Gostaria de jogar novamente?\n[1] Sim\n[2] Não")  # Solicita ao jogador para inserir 1 para jogar novamente ou 2 para sair
+
+        try:
+            jogar = int(input("Escolha: "))  # Lê a escolha do jogador (1 ou 2) como um número inteiro
+
+            if jogar == 1:  # Se o jogador escolher 1 (sim), o jogo será reiniciado
+                os.system("cls")
+               
+        
+                return True  # Reinicia o loop principal para iniciar um novo jogo
+            elif jogar == 2:  # Se o jogador escolher 2 (não), o jogo termina
+                os.system("cls")
+                print(f"Obrigado por jogar!")  # Exibe uma mensagem de agradecimento ao jogador
+                exit()  # Termina o programa
+            else:  # Se o jogador inserir um número diferente de 1 ou 2
+                os.system("cls")
+                print("Opção inválida. Por favor, escolha 1 para jogar novamente ou 2 para sair.")  # Informa ao jogador que a opção inserida não é válida
+        except ValueError:  # Se o jogador inserir algo que não seja um número inteiro
+            os.system("cls")
+            print("Opção inválida. Por favor, escolha 1 para jogar novamente ou 2 para sair.")  # Informa ao jogador que deve inserir uma opção válida
 
 # Função principal que inicia o jogo
 def jogar():
     os.system("cls")  # Limpa a tela do console para uma nova partida
-flag = True  # Define a variável de controle para continuar jogando
-
-while flag:  # Loop principal do jogo, continua enquanto flag for True
-    
-    # Inicializa variáveis do jogo e exibe informações iniciais
+    flag = True  # Define a variável de controle para continuar jogando
     num_tema = inicio()  # Solicita ao jogador escolher um tema (animais, profissões ou países)
-    tema_palavra = tema(num_tema)  # Obtém o nome do tema escolhido
     num_dificuldade = tela_dificuldade()  # Solicita ao jogador escolher a dificuldade
-    chances = dificuldade(num_dificuldade)  # Obtém o número de chances com base na dificuldade
-    os.system("cls")  # Limpa a tela do console
+
+    while flag:  # Loop principal do jogo, continua enquanto flag for True
     
-    # Carrega uma palavra secreta aleatória do tema escolhido
-    palavra_secreta = carrega_palavra_secreta(tema_palavra)
-    palavra_secreta2 = unidecode(palavra_secreta)  # Remove acentos da palavra secreta
-    
-    letras_acertadas = inicializa_letras(palavra_secreta)  # Inicializa as letras acertadas com '_' e espaços
-    
-    enforcou = False  # Indica se o jogador foi enforcado
-    acertou = False  # Indica se o jogador acertou a palavra
-    erros = 0  # Contador de erros do jogador
-    letras_faltando = len(palavra_secreta)  # Contador de letras faltando para acertar a palavra
-    letras_usadas = []  # Lista para armazenar letras já usadas pelo jogador
-    
-    desenha_forca(num_dificuldade, erros)  # Desenha o estado inicial da forca
-    print(letras_acertadas)  # Exibe as letras acertadas (inicialmente '_' e espaços) para o jogador
-    
-    while not acertou and not enforcou:  # Loop do jogo, continua enquanto o jogador não acertou ou foi enforcado
-        chute = pede_chute()  # Solicita ao jogador uma letra para chutar
-        os.system("cls")  # Limpa a tela do console
+        # Inicializa variáveis do jogo e exibe informações iniciais
         
-        if chute not in letras_usadas:  # Verifica se a letra já foi usada pelo jogador
-            if chute in palavra_secreta2:  # Se o chute está na palavra secreta
-                marca_chute_correto(chute, letras_acertadas, palavra_secreta2)  # Marca a letra acertada na palavra
-            else:  # Se o chute não está na palavra secreta
-                erros += 1  # Incrementa o contador de erros do jogador
-            
-            letras_usadas.append(chute)  # Adiciona a letra à lista de letras usadas pelo jogador
-            letras_faltando = str(letras_acertadas.count('_'))  # Calcula quantas letras ainda faltam para acertar
-            print(f"Tema: {tema_palavra}\nLetras usadas: {letras_usadas}\n")
-            print('Ainda faltam acertar {} letras'.format(letras_faltando))  # Informa quantas letras faltam para acertar a palavra
-            print('Você ainda tem {} tentativas'.format(chances - erros))  # Informa quantas tentativas restantes ao jogador
-            desenha_forca(num_dificuldade, erros)  # Desenha o estado atual da forca
-            print(letras_acertadas)  # Exibe as letras acertadas para o jogador
-        else:  # Se o jogador já usou a letra anteriormente
-            os.system("cls")  # Limpa a tela do console
-            print(f'Essa letra "{chute}" já foi usada')  # Informa ao jogador que a letra já foi usada
-            print(f"\nLetras usadas: {letras_usadas}\n")  # Exibe a lista de letras já usadas pelo jogador
-            print("-----Palavra Secreta-----\n")
-            print(letras_acertadas)  # Exibe as letras acertadas para o jogador
-
-        enforcou = erros == chances  # Verifica se o jogador foi enforcado (erros igual ao número de chances)
-        acertou = "_" not in letras_acertadas  # Verifica se o jogador acertou todas as letras da palavra
+        tema_palavra = tema(num_tema)  # Obtém o nome do tema escolhido
+        
+        chances = dificuldade(num_dificuldade)  # Obtém o número de chances com base na dificuldade
+        os.system("cls")  # Limpa a tela do console
     
-    if acertou:  # Se o jogador acertou a palavra
-        print("\nParabéns, você ganhou!")  # Informa ao jogador que ele ganhou o jogo
-        print(f"A palavra era {palavra_secreta}\n")  # Exibe a palavra secreta ao jogador
-        os.system('pause')  # Pausa o programa para que o jogador possa ver a palavra antes de continuar
-        proxima_partida()  # Pergunta ao jogador se ele deseja jogar novamente
-    else:  # Se o jogador foi enforcado
-        print("\nPuxa, você foi enforcado!")  # Informa ao jogador que ele foi enforcado
-        print(f"A palavra era {palavra_secreta}\n")  # Exibe a palavra secreta ao jogador
-        os.system('pause')  # Pausa o programa para que o jogador possa ver a palavra antes de continuar
-        Fim()  # Pergunta ao jogador se ele deseja jogar novamente
+        # Carrega uma palavra secreta aleatória do tema escolhido
+        palavra_secreta = carrega_palavra_secreta(tema_palavra)
+        palavra_secreta2 = unidecode(palavra_secreta)  # Remove acentos da palavra secreta
+    
+        letras_acertadas = inicializa_letras(palavra_secreta)  # Inicializa as letras acertadas com '_' e espaços
+    
+        enforcou = False  # Indica se o jogador foi enforcado
+        acertou = False  # Indica se o jogador acertou a palavra
+        erros = 0  # Contador de erros do jogador
+        letras_faltando = len(palavra_secreta)  # Contador de letras faltando para acertar a palavra
+        letras_usadas = []  # Lista para armazenar letras já usadas pelo jogador
+    
+        desenha_forca(num_dificuldade, erros)  # Desenha o estado inicial da forca
+        print(letras_acertadas)  # Exibe as letras acertadas (inicialmente '_' e espaços) para o jogador
+    
+        while not acertou and not enforcou:  # Loop do jogo, continua enquanto o jogador não acertou ou foi enforcado
+            chute = pede_chute()  # Solicita ao jogador uma letra para chutar
+            os.system("cls")  # Limpa a tela do console
+        
+            if chute not in letras_usadas:  # Verifica se a letra já foi usada pelo jogador
+                if chute in palavra_secreta2:  # Se o chute está na palavra secreta
+                    marca_chute_correto(chute, letras_acertadas, palavra_secreta2)  # Marca a letra acertada na palavra
+                else:  # Se o chute não está na palavra secreta
+                    erros += 1  # Incrementa o contador de erros do jogador
+            
+                letras_usadas.append(chute)  # Adiciona a letra à lista de letras usadas pelo jogador
+                letras_faltando = str(letras_acertadas.count('_'))  # Calcula quantas letras ainda faltam para acertar
+                print(f"Tema: {tema_palavra}\nLetras usadas: {letras_usadas}\n")
+                print('Ainda faltam acertar {} letras'.format(letras_faltando))  # Informa quantas letras faltam para acertar a palavra
+                print('Você ainda tem {} tentativas'.format(chances - erros))  # Informa quantas tentativas restantes ao jogador
+                desenha_forca(num_dificuldade, erros)  # Desenha o estado atual da forca
+                print(letras_acertadas)  # Exibe as letras acertadas para o jogador
+            else:  # Se o jogador já usou a letra anteriormente
+                os.system("cls")  # Limpa a tela do console
+                print(f'Essa letra "{chute}" já foi usada')  # Informa ao jogador que a letra já foi usada
+                print(f"\nLetras usadas: {letras_usadas}\n")  # Exibe a lista de letras já usadas pelo jogador
+                print("-----Palavra Secreta-----\n")
+                print(letras_acertadas)  # Exibe as letras acertadas para o jogador
 
+            enforcou = erros == chances  # Verifica se o jogador foi enforcado (erros igual ao número de chances)
+            acertou = "_" not in letras_acertadas  # Verifica se o jogador acertou todas as letras da palavra
+    
+        if acertou:  # Se o jogador acertou a palavra
+            print("\nParabéns, você ganhou!")  # Informa ao jogador que ele ganhou o jogo
+            print(f"A palavra era {palavra_secreta}\n")  # Exibe a palavra secreta ao jogador
+            proxima_partida() # Se o jogador deseja jogar novamente
+                
+            
+        else:  # Se o jogador foi enforcado
+            print("\nPuxa, você foi enforcado!")  # Informa ao jogador que ele foi enforcado
+            print(f"A palavra era {palavra_secreta}\n")  # Exibe a palavra secreta ao jogador
+            os.system('pause')  # Pausa o programa para que o jogador possa ver a palavra antes de continuar
+            while True:  # Loop externo para garantir que o jogo seja reiniciado após a função Fim()
+                jogar()  # Chama a função principal do jogo
+                Fim()  # Chama a função Fim() após o jogo terminar
 
 if(__name__ == '__main__'):
     jogar()  # Chama a função jogar para iniciar o jogo
