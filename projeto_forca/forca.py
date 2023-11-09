@@ -138,14 +138,12 @@ def proxima_partida():
             print("Opção inválida. Por favor, escolha 1 para jogar novamente ou 2 para sair.")  # Informa ao jogador que deve inserir uma opção válida
 
 # Função principal que inicia o jogo
-def jogar():
+def jogar(flag = True):
     os.system("cls")
-    flag = True  # Define a variável de controle para continuar jogando
-    num_tema = inicio()
-    num_dificuldade = tela_dificuldade()
-
+    
     while flag:  # Loop principal do jogo, continua enquanto flag for True
-        
+        num_tema = inicio()
+        num_dificuldade = tela_dificuldade()    
         tema_palavra = tema(num_tema)  # Obtém o nome do tema escolhido
         
         chances = dificuldade(num_dificuldade)  # Obtém o número de chances com base na dificuldade
