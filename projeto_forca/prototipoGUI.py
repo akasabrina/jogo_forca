@@ -21,6 +21,9 @@ class JogoDaForcaGUI:
         self.master.configure(bg="#09240B")
         # Inicializa variáveis de controle do jogo
         self.tema = 0
+        self.tema_escolhido = tk.StringVar()  # Variável para armazenar o tema escolhido
+        self.tema_escolhido.set("")  # Inicializa com uma string vazia
+        
         self.dificuldade = 0
         self.chances = 0
         self.palavra_secreta = ""
@@ -28,10 +31,46 @@ class JogoDaForcaGUI:
         self.letras_acertadas = []
         self.erros = 0
         # Chama o método para inicializar a interface
-        self.inicializar_interface()
+        self.menu_principal()
+
+
+    def menu_principal(self):
+        tk.Label(self.master, text="Jogo Da Forca", font=("Comic Sans Ms", 36), bg="#09240B", fg="#FFFFFF", width=15, height=1).pack(pady=200)
+        tk.Button(self.master, text="começar", font=("Comic Sans Ms", 20), bg="#09240B", fg="#FFFFFF", width=8, height=1, command=self.inicializar_interface).pack(pady=10)
+        self.canvas_forca = tk.Canvas(self.master, width=280, height=500, bg="#09240B", highlightthickness=0, bd=0)  # Define a área para desenhar a forca
+        self.canvas_forca.place(x=0, y=85, anchor=tk.NW)
+        
+        self.forca_desenho_menu()
+    def forca_desenho_menu(self):
+        # Verifica se o canvas_forca existe
+        if hasattr(self, "canvas_forca") and self.canvas_forca:
+            # Limpa a forca anterior
+            self.canvas_forca.delete("all")
+
+
+            # Coordenadas iniciais
+            x, y = 100, 50
+
+            # Desenha a haste vertical e horizontal desde o início
+            self.canvas_forca.create_line(x + 0, y, x + 0, y + 335, width=10, fill="White")  # Haste vertical
+            self.canvas_forca.create_line(x, y + 5, x + 135, y + 5, width=10, fill="White")  # Haste horizontal
+            self.canvas_forca.create_line(x, y + 40, x + 55, y + 5, width=10, fill="White")  # Haste diagonal
+            self.canvas_forca.create_line(x - 50, y + 335, x + 70, y + 335, width=10, fill="White")  # base
+            self.canvas_forca.create_line(x + 125, y, x + 125, y + 55, width=2, fill="White")  # Corda
+
+            self.cabeca()
+            self.tronco()
+            self.braco_esq()
+            self.braco_dir()
+            self.perna_esq()
+            self.perna_dir()
+            self.olho_esq()
+            self.olho_dir()
+
 
     # Método para inicializar a interface gráfica
     def inicializar_interface(self):
+        self.limpar_tela()
         # Chama o método para configurar o menu de escolha
         self.menu_escolha()
 
@@ -79,7 +118,7 @@ class JogoDaForcaGUI:
 
         # Cria rótulos para exibir o tema e a dificuldade escolhidos
         self.label_tema_escolhido = tk.Label(self.frame_jogo, text="Tema escolhido:", font=("Comic Sans Ms", 20), bg="#09240B", fg="#FFFFFF")
-        self.label_tema_escolhido.pack()
+        self.label_tema_escolhido.pack(pady = 10)
         self.label_tema = tk.Label(self.frame_jogo, text="", font=("Comic Sans Ms", 20), bg="#09240B", fg="#FFFFFF")
         self.label_tema.pack()
 
@@ -112,6 +151,7 @@ class JogoDaForcaGUI:
         self.tema = num_tema
         nome_tema = self.tema_nome(self.tema)
         self.label_tema.config(text=f"{nome_tema}")
+        self.tema_escolhido.set(nome_tema)
         self.verificar_escolhas()
 
     # Método para escolher a dificuldade
@@ -178,10 +218,12 @@ class JogoDaForcaGUI:
                 return
 
             # Adiciona widgets necessários para a nova partida
-            self.label_titulo = tk.Label(self.master, text="Não seja enforcado! Boa Sorte", font=("Comic Sans Ms", 36), bg="#09240B", fg="#FFFFFF").pack(pady=10)
-            self.label_tema_escolhido = tk.Label(self.master, text="Tema escolhido:", font=("Comic Sans Ms", 20), bg="#09240B", fg="#FFFFFF").pack(pady=50)
-            self.label_tema = tk.Label(self.master, text='', font=("Comic Sans Ms", 20), bg="#09240B", fg="#FFFFFF")
-            self.label_tema.pack()
+            self.label_mensagem= tk.Label(self.master, text="Não seja enforcado! Boa Sorte", font=("Comic Sans Ms", 36), bg="#09240B", fg="#FFFFFF").pack(pady=10)
+            self.label_tema_escolhido = tk.Label(self.master, text="Tema escolhido:", font=("Comic Sans Ms", 20), bg="#09240B", fg="#FFFFFF")
+            self.label_tema_escolhido.pack(pady=25)
+
+            self.label_tema = tk.Label(self.master, textvariable=self.tema_escolhido, font=("Comic Sans Ms", 20), bg="#09240B", fg="#FFFFFF")
+            self.label_tema.pack(pady =25)
 
             # Atualiza os rótulos relevantes
             tk.Label(self.master, text="Letras usadas: ", font=("Comic Sans Ms", 20), bg="#09240B", fg="#FFFFFF").pack()
@@ -190,7 +232,7 @@ class JogoDaForcaGUI:
             self.label_letras_usadas.pack()
 
             self.label_letras_acertadas = tk.Label(self.master, text="Palavra: ", font=("Comic Sans Ms", 20), bg="#09240B", fg="#FFFFFF")
-            self.label_letras_acertadas.pack()
+            self.label_letras_acertadas.pack(pady= 25)
 
             tk.Button(self.master, text="Chutar letra", font=("Comic Sans Ms", 20), bg="#09240B", fg="#FFFFFF", command=self.pedir_chute).pack()
 
@@ -528,6 +570,7 @@ class JogoDaForcaGUI:
     # Retorna o nome do tema com base no número do tema
     def tema_nome(self, num_tema):
         temas = {1: "animais", 2: "profissoes", 3: "paises"}
+        
 
         return temas[num_tema]
 
