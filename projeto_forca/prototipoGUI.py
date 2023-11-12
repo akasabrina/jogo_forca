@@ -433,14 +433,14 @@ class JogoDaForcaGUI:
     def olho_esq(self):
         x, y = 100, 50
         # olho esquerdo
-        self.canvas_forca.create_line(x + 113, y + 75, x + 123, y + 65, width=2, fill="red")
-        self.canvas_forca.create_line(x + 113, y + 65, x + 123, y + 75, width=2, fill="red")
+        self.canvas_forca.create_line(x + 113, y + 75, x + 123, y + 65, width=2, fill="white")
+        self.canvas_forca.create_line(x + 113, y + 65, x + 123, y + 75, width=2, fill="white")
 
     def olho_dir(self):
         x, y = 100, 50
         # olho_direito
-        self.canvas_forca.create_line(x + 129, y + 75, x + 139, y + 65, width=2, fill="red")  # Desenha os braço esquerdo
-        self.canvas_forca.create_line(x + 129, y + 65, x + 139, y + 75, width=2, fill="red")  # Desenha os braço direito
+        self.canvas_forca.create_line(x + 129, y + 75, x + 139, y + 65, width=2, fill="white")  # Desenha os braço esquerdo
+        self.canvas_forca.create_line(x + 129, y + 65, x + 139, y + 75, width=2, fill="white")  # Desenha os braço direito
 
     # Função para pedir uma letra ao usuário
     def pedir_chute(self):
