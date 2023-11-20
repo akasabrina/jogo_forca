@@ -70,7 +70,7 @@ Para a implementação do jogo foram utilizados recursos das bibliotecas: tkinte
 
 # PLUS
 
-O jogo possui um protótipo funcional em inteface gráfica, a fim de melhorar a interação. O design e a fonte escolhidos servem para representar o quadro negro e o giz, pois o jogo da forca sempre foi muito comum no ambiente escolar para entreter e estimular o raciocínio dos estudantes.
+O jogo possui um protótipo funcional em inteface gráfica, a fim de melhorar a interação. O design e a fonte escolhidos servem para representar o quadro negro e o giz, pois o jogo da forca sempre foi muito comum no ambiente escolar para entreter e estimular o raciocínio dos estudantes. (Referenciado da branch de Estevão Tavares, Colaborador do projeto)
 
 TELA INICIAL:
 
